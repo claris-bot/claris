@@ -8,6 +8,9 @@
     "debug": "nodemon main.js",
     "start": "node main.js"
   },
+  "dependencies": {
+    "discord.js": "^11.1.0"
+  },
   "author": "kebab",
   "license": "ISC"
 }
