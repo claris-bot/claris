@@ -15,6 +15,20 @@ class Command {
     }
 
     /**
+     * Name in help.
+     * 
+     * @type {string}
+     * @memberof Command
+     */
+    get helpName() {
+        return this._helpName;
+    }
+
+    set helpName(value) {
+        this._helpName = value;
+    }
+
+    /**
      * Command aliases.
      * @type {Array.<string>}
      * @memberof Command
@@ -62,12 +76,14 @@ class Command {
      * Creates an instance of Command.
      * @param {string} name Name of this command.
      * @param {Array.<string>} aliases Command aliases.
+     * @param {string} helpName Name in help.
      * @param {string} desc Description of this command.
      * @param {function} callback Callback function that returns result of this command.
      * @memberof Command
      */
-    constructor( name, aliases, desc, callback ) {
+    constructor( name, helpName, aliases, desc, callback ) {
         this.name = name;
+        this.helpName = helpName;
         this.aliases = aliases;
         this.desc = desc;
         this.callback = callback;
@@ -80,8 +96,8 @@ class Command {
      * @returns {commandReturn}
      * @memberof Command
      */
-    do( message ) {
-        return this.callback( message, require('../cache/config.js') );
+    do( message, client ) {
+        return this.callback( message, require('../cache/config.json'), client );
     }
 }
 module.exports = Command;
